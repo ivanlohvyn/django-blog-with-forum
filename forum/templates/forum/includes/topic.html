@@ -3,6 +3,7 @@
         <div>
             <div class="uk-text-lead uk-text-primary uk-text-uppercase uk-text-bolder">
                 <a href="{% url 'forum:topic_detail' slug=topic.slug %}">{{topic.title}}</a>
+                <br>
                 {% if topic.was_published_recently %}
                     <span class="uk-label uk-label-success uk-text-secondary">NEW</span>
                 {% endif %}
@@ -10,9 +11,10 @@
             </div>
             <div class="uk-text-secondary">
                 {% for tag in topic.tags.all %}
-                    <span class="uk-label uk-label-warning" uk-icon="icon: tag"><a href="">{{tag.title}}</a></span>
+                    <span class="uk-label uk-label-warning" uk-icon="icon: tag"><a href="{% url 'blog:tag_detail' slug=tag.slug%}">{{tag.title}}</a></span>
                 {% endfor %}
             </div>
         </div>
     </div>
 </div>
+
