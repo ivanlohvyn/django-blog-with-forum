@@ -1,10 +1,8 @@
-from django.shortcuts import render
-
-# Create your views here.
-from django.shortcuts import render, get_object_or_404, reverse
 from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render, reverse
 
-from .models import Topic, Message
+from .forms import TopicForm
+from .models import Message, Topic
 
 
 def topic_list(request):
@@ -14,6 +12,19 @@ def topic_list(request):
         "forum/topic_list.html",
         context={"latest_topic_list": latest_topic_list},
     )
+
+
+def topic_create(request):
+    form = TopicForm(request.POST)
+    if request.method == "POST":
+        if form.is_valid():
+            topic = form.save()
+            return HttpResponseRedirect(
+                reverse("forum:topic_detail", args=(topic.slug,))
+            )
+    else:
+        form = TopicForm()
+    return render(request, "forum/topic_create.html", {"form": form})
 
 
 def topic_detail(request, slug):
