@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="uk-text-emphasis uk-text-uppercase">
+        <p>Posts with "{{ tag.title|title}}" tag:</p>
+    </div>
+        {% for post in tag.posts.all %}
+            {% include "blog/includes/post.html" %}
+        {% endfor %}
+        <div class="uk-text-emphasis uk-text-uppercase">
+            <p>Topics with "{{ tag.title|title}}" tag:</p>
+        </div>
+            {% for topic in tag.topics.all %}
+                {% include "forum/includes/topic.html" %}
+            {% endfor %}
+{% endblock%}
