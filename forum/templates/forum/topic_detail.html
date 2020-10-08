@@ -7,15 +7,15 @@
         </div>
         <div class="uk-text-secondary">
             {% for tag in topic.tags.all %}
-                <span class="uk-label uk-label-warning"><a href="">{{tag.title}}</a></span>
+                <span class="uk-label uk-label-warning"><a href="{% url 'blog:tag_detail' slug=tag.slug%}">{{tag.title}}</a></span>
             {% endfor %}
         </div>
         <div class="uk-text-italic uk-margin-bottom">
-            <li><span uk-icon="icon: user"></span>{{post.user}}</li>
-            <li><span uk-icon="icon: calendar"></span>{{post.created}}</li>
+            <li><span uk-icon="icon: user"></span>{{topic.author}}</li>
+            <li><span uk-icon="icon: calendar"></span>{{topic.created}}</li>
         </div>
         {% for message in message_list %}
-            <article class="uk-comment uk-visible-toggle">
+            <article class="uk-comment uk-visible-toggle uk-margin-bottom">
                 <header class="uk-comment-header">
                     <div class="uk-grid-medium uk-flex-middle" uk-grid>
                         <div class="uk-width-auto">
@@ -24,6 +24,7 @@
                         <div class="uk-width-expand">
                             <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">{{message.user}}</a></h4>
                             <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
+                                <li><a href="#">{{message.author}}</a></li>
                                 <li><a href="#">{{message.pub_date}}</a></li>
                                 <li><a href="#">Reply</a></li>
                             </ul>
