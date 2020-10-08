@@ -1,0 +1,18 @@
+<div class="uk-container uk-margin-large-bottom">
+    <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
+        <div>
+            <div class="uk-text-lead uk-text-primary uk-text-uppercase uk-text-bolder">
+                <a href="{% url 'forum:topic_detail' slug=topic.slug %}">{{topic.title}}</a>
+                {% if topic.was_published_recently %}
+                    <span class="uk-label uk-label-success uk-text-secondary">NEW</span>
+                {% endif %}
+                    <span class="uk-label uk-label-success uk-text-secondary">{{topic.status}}</span>
+            </div>
+            <div class="uk-text-secondary">
+                {% for tag in topic.tags.all %}
+                    <span class="uk-label uk-label-warning" uk-icon="icon: tag"><a href="">{{tag.title}}</a></span>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
