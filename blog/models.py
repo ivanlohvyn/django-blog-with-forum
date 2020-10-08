@@ -15,7 +15,9 @@ class Post(models.Model):
     slug = models.SlugField(max_length=100, blank=True, unique=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=15, choices=STATUS_CHOICES, default=None)
+    status = models.CharField(
+        max_length=15, choices=STATUS_CHOICES, default="published"
+    )
 
     def __str__(self):
         return self.title
