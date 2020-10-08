@@ -5,7 +5,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/static/css/uikit.min.css" />
-        <link rel="stylesheet" type="text/css" href="/static/css/uikit.css" />
+        <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
         <script type="text/javascript" src="/static/js/uikit.min.js"></script>
         <script type="text/javascript" src="/static/js/uikit-icons.min.js"></script>
         <title>Blog</title>
@@ -29,7 +29,7 @@
                                     <ul class="uk-nav uk-navbar-dropdown-nav">
                                         <li>
                                             <a
-                                                href=""
+                                                href="{% url 'blog:post_list' %}"
                                                 >Posts</a
                                             >
                                         </li>
