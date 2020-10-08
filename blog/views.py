@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, reverse
 from django.http import HttpResponseRedirect
 
 from .models import Post, Tag
-from .forms import PostForm
+from .forms import PostForm, TagForm
 
 
 def index(request):
@@ -32,3 +32,24 @@ def post_create(request):
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug__iexact=slug)
     return render(request, "blog/post_detail.html", context={"post": post})
+
+
+def tag_list(request):
+    tag_list = Tag.objects.all()
+    return render(request, "blog/tag_list.html", context={"tag_list": tag_list})
+
+
+def tag_detail(request, slug):
+    tag = get_object_or_404(Tag, slug__iexact=slug)
+    return render(request, "blog/tag_detail.html", context={"tag": tag})
+
+
+def tag_create(request):
+    form = TagForm(request.POST)
+    if request.method == "POST":
+        if form.is_valid():
+            tag = form.save()
+            return HttpResponseRedirect(reverse("blog:tag_detail", args=(tag.slug,)))
+    else:
+        form = TagForm()
+    return render(request, "blog/tag_create.html", {"form": form})
