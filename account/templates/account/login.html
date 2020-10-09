@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <form action="{% url 'account:login' %}" method="POST">
+
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td><h4><span class="uk-badge">Username</span></h4></td>
+                <td>{{form.username}}</td>
+            </tr>
+            <tr>
+                <td><h4><span class="uk-badge">Password</span></h4></td>
+                <td>{{form.password}}</td>
+            </tr>
+        </table>
+            <input type="submit" class="uk-button uk-button-primary" value="log in">
+            <input type="hidden" name="next" value="{{ next }}">
+    </form>
+{% endblock %}

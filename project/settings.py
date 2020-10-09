@@ -34,6 +34,7 @@ ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", " ").split(" ")
 INSTALLED_APPS = [
     "blog.apps.BlogConfig",
     "forum.apps.ForumConfig",
+    "account.apps.AccountConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -126,3 +127,4 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+LOGIN_URL = "/account/login"
