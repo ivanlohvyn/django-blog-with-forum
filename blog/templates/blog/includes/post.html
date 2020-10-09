@@ -1,0 +1,23 @@
+<div class="uk-container uk-margin-large-bottom">
+    <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
+        <div>
+            <div class="uk-text-lead uk-text-primary uk-text-uppercase uk-text-bolder">
+                <a href="{% url 'blog:post_detail' slug=post.slug %}">{{post.title}}</a>
+                <div class="uk-text-small uk-text-muted uk-text-normal uk-text-lowercase">
+                    {{ post.body|truncatewords:10 }}
+                </div>
+                {% if post.was_published_recently %}
+                    <span class="uk-label uk-label-success uk-text-secondary">NEW</span>
+                {% endif %}
+                {% if post.was_updated_recently %}
+                    <span class="uk-label uk-label-success uk-text-secondary">{{post.status}}</span>
+                {% endif %}
+            </div>
+            <div class="uk-text-secondary">
+                {% for tag in post.tags.all %}
+                    <span class="uk-label uk-label-warning" uk-icon="icon: tag"><a href="">{{tag.title}}</a></span>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
