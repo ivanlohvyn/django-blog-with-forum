@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for topic in latest_topic_list %}
+        {% include "forum/includes/topic.html" %}
+    {% endfor %}
+{% endblock %}

@@ -42,8 +42,8 @@
                                 <a href="#">Forum</a>
                                 <div class="uk-navbar-dropdown">
                                     <ul class="uk-nav uk-navbar-dropdown-nav">
-                                        <li><a href="">Topics</a></li>
-                                        <li><a href="">New topic</a></li>
+                                        <li><a href="{% url 'forum:topic_list' %}">Topics</a></li>
+                                        <li><a href="{% url 'forum:topic_create' %}">New topic</a></li>
                                     </ul>
                                 </div>
                             </li>
