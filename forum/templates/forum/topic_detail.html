@@ -33,6 +33,11 @@
                 </header>
                 <div class="uk-comment-body uk-margin-xlarge-left">
                     <p>{{message.text}}</p>
+                    <form action="{% url 'forum:like_message' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="message_id" value="{{message.id}}"/>
+                        <button type="submit" uk-icon="icon: star">{{message.like__count}}</button>
+                    </form>
                 </div>
             </article>
         {% endfor %}
