@@ -1,7 +1,8 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, reverse
 
-from .forms import TopicForm
+from .forms import TopicForm, MessageForm
 from .models import Message, Topic
 
 
@@ -14,6 +15,7 @@ def topic_list(request):
     )
 
 
+@login_required
 def topic_create(request):
     form = TopicForm(request.POST)
     if request.method == "POST":
@@ -34,4 +36,24 @@ def topic_detail(request, slug):
         request,
         "forum/topic_detail.html",
         context={"topic": topic, "message_list": message_list},
+    )
+
+
+@login_required
+def send_message(request, slug):
+    topic = get_object_or_404(Topic, slug__iexact=slug)
+    form = MessageForm(request.POST)
+    if request.method == "POST":
+        if form.is_valid():
+            message = form.save(commit=False)
+            message.topic = topic
+            message.user = request.user
+            form.save()
+            return HttpResponseRedirect(
+                reverse("forum:topic_detail", args=(topic.slug,))
+            )
+    else:
+        form = MessageForm()
+    return render(
+        request, "forum:topic_detail.html", context={"topic": topic, "form": form}
     )
