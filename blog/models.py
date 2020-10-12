@@ -1,4 +1,6 @@
 import datetime
+
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
 
@@ -9,7 +11,7 @@ class Post(models.Model):
         ("UPDATED", "updated"),
     )
     title = models.CharField(max_length=250, db_index=True)
-    author = models.CharField(max_length=100, db_index=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=None)
     body = models.TextField()
     tags = models.ManyToManyField("Tag", blank=True, related_name="posts")
     slug = models.SlugField(max_length=100, blank=True, unique=True)
@@ -32,7 +34,7 @@ class Post(models.Model):
 class Tag(models.Model):
     title = models.CharField(max_length=30, db_index=True)
     slug = models.SlugField(max_length=30, blank=True, unique=True)
-    author = models.CharField(max_length=100, db_index=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=None)
 
     def __str__(self):
         return self.title
