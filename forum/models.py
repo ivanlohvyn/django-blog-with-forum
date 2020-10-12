@@ -37,3 +37,16 @@ class Message(models.Model):
 
     def was_published_recently(self):
         return self.created >= timezone.now() - datetime.timedelta(days=1)
+
+
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    message = models.ForeignKey(Message, on_delete=models.CASCADE)
+    added = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["user", "message"], name="unique_like_per_user"
+            )
+        ]
