@@ -56,6 +56,11 @@
                                 <div class="uk-navbar-dropdown">
                                     <ul class="uk-nav uk-navbar-dropdown-nav">
                                         <li>
+                                            <a href="{% url 'account:sign' %}" uk-icon="user"
+                                                >Create user</a
+                                            >
+                                        </li>
+                                        <li>
                                             <a href="{% url 'account:login' %}" uk-icon="sign-in"
                                                 >Log In</a
                                             >
@@ -75,7 +80,7 @@
         </div>
         <hr class="uk-margin-remove" />
         <!--Page-->
-        <div class="uk-section uk-section-muted uk-preserve-color">
+        <div class="uk-section uk-section-default uk-preserve-color">
             <div class="uk-container">{% block content %} {% endblock %}</div>
         </div>
         <!--Footer-->
