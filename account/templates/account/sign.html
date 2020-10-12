@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form action="{% url 'account:sign' %}" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" class="uk-button uk-button-primary">Create user</input>
+    </form>
+{% endblock %}
