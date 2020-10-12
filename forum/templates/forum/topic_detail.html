@@ -31,10 +31,25 @@
                         </div>
                     </div>
                 </header>
-                <div class="uk-comment-body">
+                <div class="uk-comment-body uk-margin-xlarge-left">
                     <p>{{message.text}}</p>
                 </div>
             </article>
         {% endfor %}
+        {% if user.is_authenticated %}
+            <form action="{% url 'forum:send_message' slug=topic.slug %}" method="post">
+                {% csrf_token %}
+                {{form.as_p}}
+                <div class="uk-form-width-medium" class="uk-margin">
+                    <textarea class="uk-textarea" rows="5" name="text" required="" placeholder="Message text"></textarea>
+                </div>
+                <button type="submit" class="uk-button uk-button-primary">Send</button>
+            </form>
+        {% else %}
+            <div class="uk-alert-danger" uk-alert>
+                <a class="uk-alert-close" uk-close></a>
+                <p>Please log in to send_message</p>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
