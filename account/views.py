@@ -1,6 +1,17 @@
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.shortcuts import redirect, render
+
+
+def sign(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("blog:index")
+    else:
+        form = UserCreationForm()
+    return render(request, "account/sign.html", context={"form": form})
 
 
 def login_view(request):
