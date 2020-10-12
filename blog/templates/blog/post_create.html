@@ -2,9 +2,16 @@
 
 
 {% block content %}
-<form action="{% url 'blog:post_create' %}" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="uk-button uk-button-primary">Create</button>
-</form>
-{% endblock%}
+    {% if user.is_authenticated %}
+        <form action="{% url 'blog:post_create' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="uk-button uk-button-primary">Create</button>
+        </form>
+        {% else %}
+        <div class="uk-alert-danger" uk-alert>
+            <a class="uk-alert-close" uk-close></a>
+            <p>Please log in to create new post</p>
+        </div>
+    {% endif %}
+{% endblock %}
